@@ -1,0 +1,111 @@
+h1 {
+	color:white;
+	font-size:30px;
+	font-weight:bold;
+	font-family:Courier;
+}
+
+h2 {
+	background-color: #ccc;
+	border-radius: 1em;
+	padding-left: 1em;
+}
+
+a {
+    text-decoration: none;
+    color:black;
+    padding-left: 20px;
+}
+
+img:hover {
+    padding-bottom: 50px;
+}
+
+a:hover {
+    color:darkcyan;
+    text-decoration: underline;
+}
+
+h1:hover {
+    text-decoration: inherit;
+}
+
+body {
+	background-color:#FFFFFF;
+	text-align:center;
+}
+
+#website {
+	width:100%;
+	margin: 0 auto;
+}
+
+#header {
+	width:95%;
+	margin: 0 auto;
+}
+
+#logo h1 {
+	font-size:40px;
+	font-weight:bold;
+	color:white;
+	font-family:Courier;
+}
+
+#logo {
+	float:left;
+	width:29%;
+	height:100px;
+	background-color:darkcyan;
+	margin-top:10px;
+	margin-bottom:10px;
+	border-top-left-radius:10px;
+	border-bottom-left-radius:10px;
+}
+
+#menue {
+	float:right;
+	width:70%;
+	height:100px;
+	background-color:darkgrey;
+	margin-top:10px;
+	margin-bottom:10px;
+	border-top-right-radius:10px;
+	border-bottom-right-radius:10px;
+}
+
+#main {
+	width:95%;
+	margin: 0 auto;
+}
+
+#mainLinks {
+	float:left;
+	width:29%;
+	height:600px;
+	background-color:lightgrey;
+	margin-top:10px;
+	margin-bottom:10px;
+	border-top-left-radius:10px;
+	border-bottom-left-radius:10px;
+}
+
+#inhalt {
+	float:right;
+	width:70%;
+	height:600px;
+	background-color:darkgrey;
+	margin-top:10px;
+	margin-bottom:10px;
+	border-top-right-radius:10px;
+	border-bottom-right-radius:10px;
+}
+
+#footer {
+	width:95%;
+	margin: 0 auto;
+	height:30px;
+	background-color:#6E6E6E;
+	border-radius:10px;
+	clear:both;
+}
