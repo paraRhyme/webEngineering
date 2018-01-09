@@ -86,10 +86,34 @@
 
         //create Room
         socket.on('new Room', function(roomName){
-            rooms.push(roomName, new player(users.indexOf(connections.indexOf(socket)),socket));
+            var error = false;
+            if(rooms.length >=1){
+                for(var i = 0;i < rooms.length;i++){
+                    if (rooms[i] == roomName){
+                        socket.emit('redundant Roomname', roomName);
+                        error = true;
+                    }
+                }
+            }
+            if(!(error)) {
+                rooms.push(roomName, new player(users[users.indexOf(connections.indexOf(socket))], socket));
+                socket.emit('successfull Roomcreation', roomName);
+            }
         });
 
+        //join Room
+        socket.on('join room', function(roomName){
+            var index = rooms.indexOf(roomName);
+            rooms[index].addPlayer(new player(users[users.indexOf(connections.indexOf(socket))],socket))
+            for(var i = 0; i < rooms[index].players.length;i++){
+                rooms[index].players.socket.emit('refresh Players', rooms[index].players);
+            }
+        });
 
+        //ckeckout for Rooms
+        socket.on('get Rooms', function(){
+            socket.emit('return rooms', rooms);
+        });
     });
 
 

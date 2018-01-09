@@ -6,6 +6,8 @@ $(function(){
     var $mainArea = $('#field');
     var $createRoomButton = $('#createRoomButton'); //Button
     var $roomName = $('#roomName'); //Textfield
+    var $playground = $('#line0202');
+    var $roomChooserTab = $('#roomChooserTab');
 
     $userForm.submit(function(e){
         e.preventDefault();
@@ -19,9 +21,14 @@ $(function(){
     });
 
     socket.on('redundant Username', function(data){
-        alert(data + " ist bereits vergeben. Bitte nimm einen anderen Namen.");
+        alert(data + " ist bereits vergeben. Bitte nimm einen anderen Nutzernamen.");
         console.log('Eingabe Client: '+data);
     });
+
+    socket.on('redundant Roomname', function(data){
+        alert(data + " ist bereits vergeben. Bitte nimm einen anderen Raumnamen.");
+    });
+
     socket.on('successfull Username', function () {
         console.log("Müsste jetzt die GUI ändern")
         $loginDiv.hide();
@@ -34,5 +41,28 @@ $(function(){
         $roomName.val('');
     });
 
+    socket.on('successfull Roomcreation', function(data){
+        //TODO: RaumerstellungsGUI laden
+    });
 
+    socket.on('refresh Players', function(data){
+        for(var i = 0; i < data.length; i++){
+            //TODO: Alle Spielernamen müssen der Liste hinzugefügt werden
+        }
+    });
+
+    socket.on('return rooms', function(data){
+        if(data.length == 0){
+            $playground.append('Keine Räume gefunden.');
+        }else{
+            //TODO: Auflistung der Räume in der GUI
+        }
+    });
+
+
+    //TODO: Tabs mit Funktionen verbinden
+    $roomChooserTab.onclick = function(){
+        console.log("OnClick ausgeführt");
+        socket.emit('get Rooms');
+    }
 });
