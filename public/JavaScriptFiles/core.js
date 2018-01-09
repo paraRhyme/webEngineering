@@ -9,9 +9,13 @@ $(function(){
 
     $userForm.submit(function(e){
         e.preventDefault();
-        console.log('Eingabe Client: '+$username.val());
-        socket.emit('new User', $username.val());
-        $username.val('');
+        if($username.val() == ''){
+            alert("Du musst einen Namen eingeben.");
+        }else {
+            console.log('Eingabe Client: ' + $username.val());
+            socket.emit('new User', $username.val());
+            $username.val('');
+        }
     });
 
     socket.on('redundant Username', function(data){
