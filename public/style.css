@@ -43,17 +43,17 @@ body {
     font-weight:bold;
 }
 
-#field {
+#website {
 	width:100%;
 	margin: 0 auto;
 }
 
-#line01 {
+#top {
 	width:95%;
 	margin: 0 auto;
 }
 
-#line0101 {
+#logo {
 	float:left;
 	width:29%;
 	height:100px;
@@ -62,7 +62,7 @@ body {
 	margin-bottom:10px;
 }
 
-#line0102 {
+#menue {
 	float:right;
 	width:70%;
 	height:100px;
@@ -71,12 +71,12 @@ body {
 	margin-bottom:10px;
 }
 
-#line02 {
+#center {
 	width:95%;
 	margin: 0 auto;
 }
 
-#line0201 {
+#scoreboard {
 	float:left;
 	width:29%;
 	height:600px;
@@ -85,7 +85,7 @@ body {
 	margin-bottom:10px;
 }
 
-#line0202 {
+#infobar {
 	float:right;
 	width:70%;
 	height:600px;
@@ -94,7 +94,7 @@ body {
 	margin-bottom:10px;
 }
 
-#line03 {
+#bottom {
 	width:95%;
     padding: 0 auto;
 	margin: 0 auto;
