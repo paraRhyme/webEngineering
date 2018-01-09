@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="de">
 
 <head>
@@ -6,16 +6,39 @@
 		<meta charset="UTF-8">
 	<link rel="icon" type="image/png" href="Images/icon.png">
 	<link rel="stylesheet" href="Styles/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="JavaScriptFiles/core.js"></script>
+    <style>
+        #field{
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
-	<div id="website">
-		<div id="header">
-			<div id="logo">
+    <div id="LoginDiv">
+        <div id="userFormArea">
+            <div>
+                <form id="userForm">
+                    <div>
+                        <label>Gib einen Benutzernamen ein</label>
+                        <input id="username"></input>
+                        <br />
+                        <input type="submit" value="Login" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+	<div id="field">
+		<div id="line01">
+			<div id="line0101">
 				<table>
 					<tr>
 						<td width="35%">
-							<img src="Images/icon.png" width="104" height="90" alt="Magic hat">
+							<img src="Images/icon.png" width="104" height="90" alt="Zauberhut">
 						</td>
 						<td width="10%">
 						</td>
@@ -25,17 +48,17 @@
 					</tr>
 				</table>	
 			</div>
-			<div id="menue">
+			<div id="line0102">
                 <h2>
                     <a href="http://www.google.de">Mein Profil</a>
                     <a href="http://www.google.de">Spielregeln</a>
-                    <a href="http://www.google.de">Raumauswahl</a> 
+                    <a id="roomChooserTab">Raumauswahl</a>
                     <a href="http://www.google.de">Onlineshop</a>
                 </h2>
 			</div>
 		</div>
-		<div id="center">
-			<div id="scoreboard">
+		<div id="line02">
+			<div id="line0201">
                 <center>
                     <table>
                         <tr>
@@ -90,11 +113,11 @@
                 </center>
 				<h2>Aktuelle Punkteanzahl:</h2>
 			</div>
-			<div id="infobar">
+			<div id="line0202">
 				<h2>Spielfeld</h2>
 			</div>
 		</div>
-		<div id="footer">
+		<div id="line03">
 			<p align="left">Jonas Kappa, Maximilian Lehmann, Richard Vohmann</p>
 		</div>
 	</div>
