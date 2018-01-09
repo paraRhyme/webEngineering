@@ -6,5 +6,5 @@ Projekt für die Veranstaltung Web Engineering, Thema Magic Card Game.
 * TODO: Mit welchem Service managen wir unsere mongoDb? modulus.io?
 
 ## HowTo:
-* Start mittels: node start
-* Dann aufrufen von localhost:8080
+* Start mittels: node server
+* Dann aufrufen von localhost:3000

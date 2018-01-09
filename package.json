@@ -8,6 +8,21 @@
     "express": "~4.16.2",
     "method-override": "~2.3.10",
     "mongoose": "^4.13.5",
-    "morgan": "~1.9.0"
-  }
+    "morgan": "~1.9.0",
+    "socket.io": "*"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paraRhyme/webEngineering.git"
+  },
+  "author": "Jonas Kappa, Max Lehmann, Richard Vohmann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paraRhyme/webEngineering/issues"
+  },
+  "homepage": "https://github.com/paraRhyme/webEngineering#readme"
 }
