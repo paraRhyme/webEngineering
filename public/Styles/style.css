@@ -48,7 +48,7 @@ body {
 	margin: 0 auto;
 }
 
-#top {
+#header {
 	width:95%;
 	margin: 0 auto;
 }
@@ -94,7 +94,7 @@ body {
 	margin-bottom:10px;
 }
 
-#bottom {
+#footer {
 	width:95%;
     padding: 0 auto;
 	margin: 0 auto;
