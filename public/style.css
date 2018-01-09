@@ -1,111 +1,104 @@
 h1 {
-	color:white;
-	font-size:30px;
-	font-weight:bold;
-	font-family:Courier;
+    color:white;
+    font-size:40px;
+    text-align: center;
+}
+    
+h1:hover {
+    color:black;
+    text-decoration: underline;
 }
 
 h2 {
-	background-color: #ccc;
-	border-radius: 1em;
-	padding-left: 1em;
+	color:black;
+	font-size:30px;
 }
 
-a {
-    text-decoration: none;
-    color:black;
-    padding-left: 20px;
-}
-
-img:hover {
-    padding-bottom: 50px;
-}
-
-a:hover {
+h2:hover {
     color:darkcyan;
     text-decoration: underline;
 }
 
-h1:hover {
-    text-decoration: inherit;
+div {
+    border-radius: 5px;
+}
+
+table {
+    text-align: center;
+}
+
+a {
+    color:black;
+    text-decoration: none;
+}
+
+img {
+    text-align: center;
 }
 
 body {
-	background-color:#FFFFFF;
+	background-color:#262626;
 	text-align:center;
+    font-family:courier;
+    font-weight:bold;
 }
 
-#website {
+#field {
 	width:100%;
 	margin: 0 auto;
 }
 
-#header {
+#line01 {
 	width:95%;
 	margin: 0 auto;
 }
 
-#logo h1 {
-	font-size:40px;
-	font-weight:bold;
-	color:white;
-	font-family:Courier;
-}
-
-#logo {
+#line0101 {
 	float:left;
 	width:29%;
 	height:100px;
 	background-color:darkcyan;
 	margin-top:10px;
 	margin-bottom:10px;
-	border-top-left-radius:10px;
-	border-bottom-left-radius:10px;
 }
 
-#menue {
+#line0102 {
 	float:right;
 	width:70%;
 	height:100px;
 	background-color:darkgrey;
 	margin-top:10px;
 	margin-bottom:10px;
-	border-top-right-radius:10px;
-	border-bottom-right-radius:10px;
 }
 
-#main {
+#line02 {
 	width:95%;
 	margin: 0 auto;
 }
 
-#mainLinks {
+#line0201 {
 	float:left;
 	width:29%;
 	height:600px;
 	background-color:lightgrey;
 	margin-top:10px;
 	margin-bottom:10px;
-	border-top-left-radius:10px;
-	border-bottom-left-radius:10px;
 }
 
-#inhalt {
+#line0202 {
 	float:right;
 	width:70%;
 	height:600px;
 	background-color:darkgrey;
 	margin-top:10px;
 	margin-bottom:10px;
-	border-top-right-radius:10px;
-	border-bottom-right-radius:10px;
 }
 
-#footer {
+#line03 {
 	width:95%;
+    padding: 0 auto;
 	margin: 0 auto;
 	height:30px;
-	background-color:#6E6E6E;
-	border-radius:10px;
+	background-color:darkcyan;
 	clear:both;
 }
