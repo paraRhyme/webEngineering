@@ -10,7 +10,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script language="JavaScript" type="text/javascript" src="JavaScriptFiles/core.js"></script>
     <style>
-        #website{
+        #website {
+            display: 1;
+        }
+        #LoginDiv {
             display: none;
         }
     </style>
@@ -35,90 +38,30 @@
 	<div id="website">
 		<div id="header">
 			<div id="logo">
-				<table>
-					<tr>
-						<td width="35%">
-							<img src="Images/icon.png" width="104" height="90" alt="Zauberhut">
-						</td>
-						<td width="10%">
-						</td>
-						<td>
-                            <h1><a href="https://www.amigo-spiele.de/spiel/wizard">Wizard</a></h1>
-						</td>
-					</tr>
-				</table>	
+				<p id=logotext>
+							<img src="Images/icon.png" width="90" height="90" alt="wizard hat">
+                            <h1><a href="https://www.amigo-spiele.de/spiel/wizard" target="_blank">Wizard</a></h1>
+                </p>			
 			</div>
 			<div id="menue">
-                <h2>
-                    <a href="http://www.google.de">Mein Profil</a>
-                    <a href="http://www.google.de">Spielregeln</a>
-                    <a id="roomChooserTab">Raumauswahl</a>
-                    <a href="http://www.google.de">Onlineshop</a>
-                </h2>
+                <h2><a href="http://www.google.de" style="margin-left: 40px">Mein Profil</a></h2>
+                <h2><a href="http://www.google.de">Spielregeln</a></h2>
+                <h2><a id="roomChooserTab">Raumauswahl</a></h2>
+                <h2><a href="http://www.google.de">Onlineshop</a></h2>
 			</div>
 		</div>
 		<div id="center">
 			<div id="scoreboard">
-                <center>
-                    <table>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                        </tr>
-                    </table>
-                </center>
-				<h2>Aktuelle Punkteanzahl:</h2>
+                <!-- Angepasste Tabelle je nachdem wieviel Spieler mitspielen -->
+				<h3>Aktuelle Punkteanzahl:</h3>
 			</div>
 			<div id="cardsfield">
-				<h2>Spielfeld</h2>
+                <!-- Spielfeld, oberer Bereich: aktuelle Karte, unterer Bereich: meine Karten -->
+                <h3>Spielfeld</h3>
 			</div>
 		</div>
 		<div id="footer">
-			<p align="left">Jonas Kappa, Maximilian Lehmann, Richard Vohmann</p>
+			<p id="footertext">Web Engineering I | Projektmitglieder: Jonas Kappa, Maximilian Lehmann, Richard Vohmann</p>
 		</div>
 	</div>
 </body>
