@@ -3,10 +3,10 @@ $(function(){
     var $userForm = $('#userForm'); //Form
     var $username = $('#username'); //Textfield
     var $loginDiv = $('#LoginDiv');
-    var $mainArea = $('#field');
+    var $mainArea = $('#website');
     var $createRoomButton = $('#createRoomButton'); //Button
     var $roomName = $('#roomName'); //Textfield
-    var $playground = $('#line0202');
+    var $playground = $('#cardsfield');
     var $roomChooserTab = $('#roomChooserTab');
 
     $userForm.submit(function(e){
