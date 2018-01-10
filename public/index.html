@@ -6,19 +6,22 @@
 		<meta charset="UTF-8">
 	<link rel="icon" type="image/png" href="Images/icon.png">
 	<link rel="stylesheet" href="Styles/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Joti+One" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script language="JavaScript" type="text/javascript" src="JavaScriptFiles/core.js"></script>
     <style>
         #website {
-            display: 1;
+            display: 1;     <!-- 1 = Ein | None = Aus -->
         }
         #LoginDiv {
-            display: none;
+            display: none;  <!-- 1 = Ein | None = Aus -->
         }
     </style>
 </head>
 
+<!-- LOGIN ---------------------------------------------------------------->    
+    
 <body>
     <div id="LoginDiv">
         <div id="userFormArea">
@@ -36,6 +39,8 @@
     </div>
 
 	<div id="website">
+        
+<!-- HEADER ---------------------------------------------------------------->        
 		<div id="header">
 			<div id="logo">
 				<p id=logotext>
@@ -50,6 +55,9 @@
                 <h2><a href="http://www.google.de">Onlineshop</a></h2>
 			</div>
 		</div>
+    
+<!-- CENTER ---------------------------------------------------------------->
+    
 		<div id="center">
 			<div id="scoreboard">
                 <!-- Angepasste Tabelle je nachdem wieviel Spieler mitspielen -->
@@ -60,6 +68,9 @@
                 <h3>Spielfeld</h3>
 			</div>
 		</div>
+    
+<!-- FOOTER ---------------------------------------------------------------->
+    
 		<div id="footer">
 			<p id="footertext">Web Engineering I | Projektmitglieder: Jonas Kappa, Maximilian Lehmann, Richard Vohmann</p>
 		</div>
