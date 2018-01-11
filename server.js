@@ -16,7 +16,7 @@
     class Player {
         constructor(name, socket){
             this.name = name;
-            this.socket = socket;
+            this.socketIndex = socket;
             this.cards = [];
         }
         set cards(cards){
@@ -25,10 +25,10 @@
         get cards(){
             return this._cards;
         }
-        set socket(socket){
+        set socketIndex(socket){
             this._socket = socket;
         }
-        get socket() {
+        get socketIndex() {
             return this._socket;
         }
         set name(name){
@@ -88,6 +88,7 @@
             connections.splice(index, 1);
             users.splice(index, 1);
             console.log('Disconnected: %s sockets connected', connections.length);
+            //TODO: gegebenenfalls Raum löschen
         });
 
         //create User
@@ -116,8 +117,9 @@
             console.log("Server: Neuer Raum wird erstellt...");
             var username = users[connections.indexOf(socket)];
             console.log("Server: Username: "+username);
-            var player = new Player(username,socket);
+            var player = new Player(username,connections.indexOf(socket));
             console.log("Server: Player: "+player);
+            console.log(player.socketIndex);
             var room = new Room(roomName, player);
             console.log("Server: Room: "+room);
             rooms.push(room);
@@ -134,9 +136,9 @@
                 }
             }
             var room = rooms[index];
-            room.addPlayer(new Player(users[users.indexOf(connections.indexOf(socket))],socket))
+            room.addPlayer(new Player(users[users.indexOf(connections.indexOf(socket))],connections.indexOf(socket)));
             for(var i = 0; i < room.players.length;i++){
-                room.players[i].socket.emit('refresh Players', room.players);
+                connections[room.players[i].socketIndex].emit('refresh Players', room.players);
             }
         });
 
@@ -150,7 +152,7 @@
             var result = true;
             if(rooms.length >=1){
                 for(var i = 0;i < rooms.length;i++){
-                    if (rooms[i] == roomName){
+                    if (rooms[i] == data){
                         result = false;
                     }
                 }
@@ -172,7 +174,7 @@
             for(var i = 0; i < room.players.length;i++){
                 console.log("server: Daten an "+room.players[i].name+" werden gesendet...");
                 //TODO: Fehler finden -> Irgendein Modul spinnt hier rum
-                room.players[i].socket.emit('refresh Players', room.players);
+                connections[room.players[i].socketIndex].emit('refresh Players', room.players);
                 console.log("Server: Daten an "+room.players[i].name+" wurden gesendet...");
             }
         });
