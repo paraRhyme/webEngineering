@@ -65,7 +65,7 @@ $(function(){
         var $createRoomForm = $('#createRoomForm');
         $createRoomForm.submit(function(){
             console.log("Raum erstellen Button geklickt");
-            var check = prompt('Geben Sie einen Namen für den Raum ein.','');
+            var check = prompt('Geben Sie einen Namen für den Raum ein.',''); //TODO: ohne prompt lösen -> Textfeld mit Eingabe erstellen
             socket.emit('request roomname',check);
             socket.on('answer roomname', function(data){
                 if(data){

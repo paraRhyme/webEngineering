@@ -148,12 +148,13 @@
             socket.emit('return rooms', rooms);
         });
 
+        //redundant roomName?
         socket.on('request roomname', function(data){
             var result = true;
             if(rooms.length >=1){
                 for(var i = 0;i < rooms.length;i++){
                     if (rooms[i] == data){
-                        result = false;
+                        result = false; //TODO: funktion überprüfen
                     }
                 }
             }
