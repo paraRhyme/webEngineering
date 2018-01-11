@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+//"use strict";
 // set up ========================
     var express  = require('express');
     var app      = express();                               // create our app w/ express
@@ -12,16 +12,34 @@
     var connections = [];
     var users = [];
     var rooms = [];
-    class player {
-        constructor(username, socket){
-            this.username = username;
+
+    class Player {
+        constructor(name, socket){
+            this.name = name;
             this.socket = socket;
+            this.cards = [];
         }
-        getCards(cards){
-            this.cards = cards;
+        set cards(cards){
+            this._cards = cards;
+        }
+        get cards(){
+            return this._cards;
+        }
+        set socket(socket){
+            this._socket = socket;
+        }
+        get socket() {
+            return this._socket;
+        }
+        set name(name){
+            this._name = name;
+        }
+        get name(){
+            return this._name;
         }
     }
-    class room {
+
+    class Room {
         constructor(name, player){
             this.roomname = name;
             this.players = [];
@@ -32,6 +50,15 @@
         }
         removePlayer(player){
             players.splice(players.indexOf(player),1);
+        }
+        getRoomname(){
+            return this.roomname;
+        }
+        set players(setter) {
+            this._players = setter;
+        }
+        get players(){
+            return this._players;
         }
     }
 
@@ -86,33 +113,68 @@
 
         //create Room
         socket.on('new Room', function(roomName){
-            var error = false;
-            if(rooms.length >=1){
-                for(var i = 0;i < rooms.length;i++){
-                    if (rooms[i] == roomName){
-                        socket.emit('redundant Roomname', roomName);
-                        error = true;
-                    }
-                }
-            }
-            if(!(error)) {
-                rooms.push(roomName, new player(users[users.indexOf(connections.indexOf(socket))], socket));
-                socket.emit('successfull Roomcreation', roomName);
-            }
+            console.log("Server: Neuer Raum wird erstellt...");
+            var username = users[connections.indexOf(socket)];
+            console.log("Server: Username: "+username);
+            var player = new Player(username,socket);
+            console.log("Server: Player: "+player);
+            var room = new Room(roomName, player);
+            console.log("Server: Room: "+room);
+            rooms.push(room);
+            console.log("Server: Room of Array: "+rooms[0]);
+            console.log('Server: Raum mit Namen "'+ roomName +'" erstellt');
         });
 
         //join Room
-        socket.on('join room', function(roomName){
-            var index = rooms.indexOf(roomName);
-            rooms[index].addPlayer(new player(users[users.indexOf(connections.indexOf(socket))],socket))
-            for(var i = 0; i < rooms[index].players.length;i++){
-                rooms[index].players.socket.emit('refresh Players', rooms[index].players);
+        socket.on('join Room', function(roomName){
+            var index = 0;
+            for(var i = 0;i<rooms.length;i++){
+                if(rooms[i].roomname == roomName){
+                    index = i;
+                }
+            }
+            var room = rooms[index];
+            room.addPlayer(new Player(users[users.indexOf(connections.indexOf(socket))],socket))
+            for(var i = 0; i < room.players.length;i++){
+                room.players[i].socket.emit('refresh Players', room.players);
             }
         });
 
         //ckeckout for Rooms
         socket.on('get Rooms', function(){
+            console.log("Server: got Room request")
             socket.emit('return rooms', rooms);
+        });
+
+        socket.on('request roomname', function(data){
+            var result = true;
+            if(rooms.length >=1){
+                for(var i = 0;i < rooms.length;i++){
+                    if (rooms[i] == roomName){
+                        result = false;
+                    }
+                }
+            }
+            socket.emit('answer roomname', result);
+        });
+
+        socket.on('request Players', function(roomName){
+            console.log("Server: Raumname: "+roomName);
+            var index = 0;
+            for(var i = 0;i<rooms.length;i++){
+                if(rooms[i].roomname == roomName){
+                    index = i;
+                }
+            }
+            var room = rooms[index];
+            console.log(room);
+            console.log('Server: Raumindex: '+index);
+            for(var i = 0; i < room.players.length;i++){
+                console.log("server: Daten an "+room.players[i].name+" werden gesendet...");
+                //TODO: Fehler finden -> Irgendein Modul spinnt hier rum
+                room.players[i].socket.emit('refresh Players', room.players);
+                console.log("Server: Daten an "+room.players[i].name+" wurden gesendet...");
+            }
         });
     });
 

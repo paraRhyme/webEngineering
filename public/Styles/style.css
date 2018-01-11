@@ -151,13 +151,14 @@ body {
 	margin-bottom:10px;
 }
 
-#cardsfield {
+#playground {
 	float:right;
 	width:70%;
 	height:600px;
 	background-color:darkgrey;
 	margin-top:10px;
 	margin-bottom:10px;
+    position: relative;
 }
 
 #footer {
@@ -172,4 +173,22 @@ body {
 #footertext {
     padding-left: 20px;
     text-align: left;
+}
+
+.button {
+    background: darkcyan;
+    border-radius: 28px;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+    border-width: 0px;
+}
+
+.button:hover {
+    background: #3cb0fd;
+}
+
+#RoomChooserAreaButton {
+    position: absolute;
+    bottom: 0;
 }

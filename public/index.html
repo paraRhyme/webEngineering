@@ -6,22 +6,16 @@
 		<meta charset="UTF-8">
 	<link rel="icon" type="image/png" href="Images/icon.png">
 	<link rel="stylesheet" href="Styles/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Joti+One" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script language="JavaScript" type="text/javascript" src="JavaScriptFiles/core.js"></script>
     <style>
-        #website {
-            display: 1;     <!-- 1 = Ein | None = Aus -->
-        }
-        #LoginDiv {
-            display: none;  <!-- 1 = Ein | None = Aus -->
+        #website{
+            display: none;
         }
     </style>
 </head>
 
-<!-- LOGIN ---------------------------------------------------------------->    
-    
 <body>
     <div id="LoginDiv">
         <div id="userFormArea">
@@ -31,7 +25,7 @@
                         <label>Gib einen Benutzernamen ein</label>
                         <input id="username"></input>
                         <br />
-                        <input type="submit" value="Login" />
+                        <input class="button" type="submit" value="Login" />
                     </div>
                 </form>
             </div>
@@ -39,40 +33,92 @@
     </div>
 
 	<div id="website">
-        
-<!-- HEADER ---------------------------------------------------------------->        
 		<div id="header">
 			<div id="logo">
-				<p id=logotext>
-							<img src="Images/icon.png" width="90" height="90" alt="wizard hat">
-                            <h1><a href="https://www.amigo-spiele.de/spiel/wizard" target="_blank">Wizard</a></h1>
-                </p>			
+				<table>
+					<tr>
+						<td width="35%">
+							<img src="Images/icon.png" width="104" height="90" alt="Zauberhut">
+						</td>
+						<td width="10%">
+						</td>
+						<td>
+                            <h1><a href="https://www.amigo-spiele.de/spiel/wizard">Wizard</a></h1>
+						</td>
+					</tr>
+				</table>	
 			</div>
 			<div id="menue">
-                <h2 style="padding-left: 45px"><a href="http://www.google.de">Mein Profil</a></h2>
-                <h2><a href="http://www.google.de">Spielregeln</a></h2>
-                <h2><a id="roomChooserTab">Raumauswahl</a></h2>
-                <h2><a href="http://www.google.de">Onlineshop</a></h2>
+                <h2>
+                    <a href="http://www.google.de">Mein Profil</a>
+                    <a href="http://www.google.de">Spielregeln</a>
+                    <a id="roomChooserTab" onclick="getRooms()">Raumauswahl</a>
+                    <a href="http://www.google.de">Onlineshop</a>
+                </h2>
 			</div>
 		</div>
-    
-<!-- CENTER ---------------------------------------------------------------->
-    
 		<div id="center">
 			<div id="scoreboard">
-                <!-- Angepasste Tabelle je nachdem wieviel Spieler mitspielen -->
-				<h3>Aktuelle Punkteanzahl:</h3>
+                <center>
+                    <table>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                        </tr>
+                    </table>
+                </center>
+				<h2>Aktuelle Punkteanzahl:</h2>
 			</div>
-			<div id="cardsfield">
-                <!-- Spielfeld, oberer Bereich: aktuelle Karte, unterer Bereich: meine Karten -->
-                <h3>Spielfeld</h3>
+			<div id="playground">
+				<h2>Spielfeld</h2>
 			</div>
 		</div>
-    
-<!-- FOOTER ---------------------------------------------------------------->
-    
 		<div id="footer">
-			<p id="footertext">Web Engineering I | Projektmitglieder: Jonas Kappa, Maximilian Lehmann, Richard Vohmann</p>
+			<p align="left">Jonas Kappa, Maximilian Lehmann, Richard Vohmann</p>
 		</div>
 	</div>
 </body>
