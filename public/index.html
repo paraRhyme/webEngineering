@@ -12,15 +12,15 @@
     <script language="JavaScript" type="text/javascript" src="JavaScriptFiles/core.js"></script>
     <style>
         #website {
-            display: none;        <!-- 1 = Ein | None = Aus -->
+            display: 1;  <!-- 1 = Ein | None = Aus -->
         }
         #LoginDiv {
-            display: 1;     <!-- 1 = Ein | None = Aus -->
+            display: none;     <!-- 1 = Ein | None = Aus -->
         }
     </style>
 </head>
 
-<!-- LOGIN ---------------------------------------------------------------->
+    <!-- LOGIN ---------------------------------------------------------------->
 
 <body>
 <div id="LoginDiv">
@@ -31,7 +31,7 @@
                     <label>Gib einen Benutzernamen ein</label>
                     <input id="username"></input>
                     <br />
-                    <input type="submit" value="Login" />
+                    <input class="button" type="submit" value="Login" />
                 </div>
             </form>
         </div>
@@ -50,10 +50,10 @@
             </p>
         </div>
         <div id="menue">
-            <h2 style="padding-left: 45px"><a href="#">Mein Profil</a></h2>
-            <h2><a href="#">Spielregeln</a></h2>
+            <h2 style="padding-left: 45px"><a onclick="clickMeinProfil()">Mein Profil</a></h2>
+            <h2><a onclick="clickSpielregeln()">Spielregeln</a></h2>
             <h2><a id="roomChooserTab">Raumauswahl</a></h2>
-            <h2><a href="#">Onlineshop</a></h2>
+            <h2><a onclick="clickOnlineshop()">Onlineshop</a></h2>
         </div>
     </div>
 
@@ -61,20 +61,21 @@
 
     <div id="center">
         <div id="scoreboard">
-            <!-- Angepasste Tabelle je nachdem wieviel Spieler mitspielen -->
-            <h3>Aktuelle Punkteanzahl:</h3>
+            <h4>Block der Wahrheit</h4>
         </div>
         <div id="playground">
-            <ul>
-                <li>Spieler 1</li>
-                <li>Spieler 2</li>
-                <li>Spieler 3</li>
-                <li>Spieler 4</li>
-                <li>Spieler 5</li>
-                <li>Spieler 6</li>
-            </ul>
-            <!-- Spielfeld, oberer Bereich: aktuelle Karte, unterer Bereich: meine Karten -->
-            <h3>Spielfeld</h3>
+            <div id="player1">Spieler 1</div>
+            <div id="player2">Spieler 2</div>
+            <div id="player3">Spieler 3</div>
+            <div id="player4">Spieler 4</div>
+            <div id="player5"></div>
+            <h4>Spielfeld</h4>
+            <div id="card1">Blau 8</div>
+            <div id="card2">Gelb 2</div>
+            <div id="card3">Wizard</div>
+            <div id="card4">Grün 5</div>
+            <div id="card5">Rot 11</div>
+            <div id="card6">Naar</div>
         </div>
     </div>
 
@@ -84,6 +85,9 @@
         <p id="footertext">Web Engineering I | Projektmitglieder: Jonas Kappa, Maximilian Lehmann, Richard Vohmann</p>
     </div>
 </div>
+
+    <!-- DYNAMIC DIVS ---------------------------------------------------------->
+
 </body>
 
 </html>

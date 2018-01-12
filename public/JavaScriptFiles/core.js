@@ -85,3 +85,15 @@ function getRooms(){
     console.log("OnClick ausgeführt");
     socket.emit('get Rooms');
 }
+/* bisschen Scheiß von Richard */
+function clickSpielregeln(){
+        alert ("Leider fehlen hier noch die Spielregeln, versuche sie doch bitte über eine Suche bei Google zu finden! (;");
+}
+
+function clickMeinProfil(){
+        alert ("Leider fehlt hier noch die Integration deines Profils..");
+}
+
+function clickOnlineshop(){
+        alert ("Leider fehlt hier noch der Onlineshop, demnächst kannst du hier für Ingame-Währung neue Designs für deine Spielkarten erwerben!");
+}

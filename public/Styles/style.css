@@ -13,18 +13,6 @@ h1:hover {
     text-decoration: underline;
 }
 
-h3 {
-	color:black;
-	font-size:30px;
-    display: table-cell;
-    vertical-align: middle;
-}
-
-h3:hover {
-    color:darkcyan;
-    text-decoration: underline;
-}
-
 h2 {
     text-decoration: none;
     display:table-cell;
@@ -65,6 +53,25 @@ h2 > a:hover:before {
   visibility: visible;
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
+}
+
+h3 {
+	color:black;
+	font-size:30px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+h3:hover {
+    color:darkcyan;
+    text-decoration: underline;
+}
+
+h4 {
+    color: black;
+    font-size: 20px;
+    padding-top: 150px;
+    padding-bottom: 150px;
 }
 
 div {
@@ -151,6 +158,13 @@ body {
 	margin-bottom:10px;
 }
 
+#for3, #for4, #for5, #for6 {
+    background-color: white;
+    text-align: center;
+    border: 1px solid black;
+    color: #474747 
+}
+
 #playground {
 	float:right;
 	width:70%;
@@ -159,6 +173,31 @@ body {
 	margin-top:10px;
 	margin-bottom:10px;
     position: relative;
+}
+
+#player1 , #player2 , #player3, #player4, #player5 {
+    display: inline;
+    text-align: center;
+    background-color: darkcyan; 
+    border-radius: none;
+}
+
+#player1 , #player2 , #player3, #player4 {
+    margin-right: 20px
+}
+
+#card1 , #card2 , #card3, #card4, #card5, #card6 {
+    display: inline;
+    text-align: center;
+    height: 200px;
+    background-color: white;
+    border-radius: none;
+    /* display:table-cell;
+    vertical-align: bottom; */
+}
+
+#card1 , #card2 , #card3, #card4, #card5 {
+    margin-right: 20px
 }
 
 #footer {
