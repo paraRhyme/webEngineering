@@ -6,7 +6,7 @@ $(function(){
     var $loginDiv = $('#LoginDiv');
     var $mainArea = $('#website');
     var $createRoomButton = $('#createRoomButton'); //Button
-    var $roomName = $('#roomName'); //Textfield
+     //Textfield
     var $playground = $('#playground');
     var $roomChooserTab = $('#roomChooserTab');
 
@@ -53,11 +53,12 @@ $(function(){
         }else{
             //TODO: Auflistung der Räume in der GUI
             for(var i = 0; i < data.length; i++){
-                $playground.append('<div class="Room" val="'+data[i].roomname+'">'+data[i].roomname+'</div>');
+                $playground.append('<div class="Room" val="'+data[i]._roomname+'">'+data[i]._roomname+'</div>');
             }
         }
-        $playground.append('</div><div id="RoomChooserAreaButton">' +
+        $playground.append('</div><div id="RoomChooserAreaCreate">' +
             '<form id="createRoomForm">' +
+            '<input id="roomName">' +
             '<input type="submit" value="Raum erstellen" class="button">' +
             '</form>' +
             '</div>'); //TODO: Button muss noch mittig
@@ -65,18 +66,25 @@ $(function(){
         var $createRoomForm = $('#createRoomForm');
         $createRoomForm.submit(function(){
             console.log("Raum erstellen Button geklickt");
-            var check = prompt('Geben Sie einen Namen für den Raum ein.',''); //TODO: ohne prompt lösen -> Textfeld mit Eingabe erstellen
-            socket.emit('request roomname',check);
-            socket.on('answer roomname', function(data){
-                if(data){
-                    console.log("Habe Antwort auf Raumnamen bekommen: "+data);
-                    socket.emit('new Room',check);
-                    //TODO: RaumerstellungsGUIladen
-                    socket.emit('request Players',check);
-                }else{
-                    alert('Der gewählte Name ist schon vergeben.');
-                }
-            });
+            var $roomName = $('#roomName');
+            var check = $roomName.val();
+            console.log(check);
+            if(check == ""){
+                alert("Bite gib einen Namen für den Raum ein.");
+            }else{
+                socket.emit('request roomname', check);
+                socket.on('answer roomname', function (data) {
+                    if (data) {
+                        console.log("Habe Antwort auf Raumnamen bekommen: " + data);
+                        socket.emit('new Room', check);
+                        //TODO: RaumerstellungsGUIladen
+                        socket.emit('request Players', check);
+                    } else {
+                        alert('Der gewählte Name ist schon vergeben.');
+                    }
+                });
+            }
+            console.log("Warum disconnecte ich?");
         })
     });
 

@@ -18,6 +18,9 @@
             this.name = name;
             this.socketIndex = socket;
             this.cards = [];
+            this.points = 0;
+            this.prediction = 0;
+            this.tricks = 0;
         }
         set cards(cards){
             this._cards = cards;
@@ -26,16 +29,43 @@
             return this._cards;
         }
         set socketIndex(socket){
-            this._socket = socket;
+            this._socketIndex = socket;
         }
         get socketIndex() {
-            return this._socket;
+            return this._socketIndex;
         }
         set name(name){
             this._name = name;
         }
         get name(){
             return this._name;
+        }
+
+        set points(set){
+            this._points = set;
+        }
+        get points(){
+            return this._points;
+        }
+        addPoints(val){
+            this._points += val;
+        }
+
+        set prediction(set){
+            this._prediction = set;
+        }
+        get prediction(){
+            return this.prediction;
+        }
+
+        set tricks(set){
+            this._tricks = set;
+        }
+        get tricks(){
+            return this._tricks;
+        }
+        addTrick(){
+            this._tricks++;
         }
     }
 
@@ -51,8 +81,12 @@
         removePlayer(player){
             players.splice(players.indexOf(player),1);
         }
-        getRoomname(){
-            return this.roomname;
+
+        set roomname(set){
+            this._roomname = set;
+        }
+        get roomname(){
+            return this._roomname;
         }
         set players(setter) {
             this._players = setter;
@@ -105,7 +139,7 @@
                     }
                 }
             }
-            if(!(error)) {
+            if(error == false) {
                 console.log("Server: Name einzigartig...")
                 users.push(data);
                 socket.emit('successfull Username');
@@ -173,10 +207,12 @@
             console.log(room);
             console.log('Server: Raumindex: '+index);
             for(var i = 0; i < room.players.length;i++){
-                console.log("server: Daten an "+room.players[i].name+" werden gesendet...");
+                console.log("server: Daten an "+room.players[i]._name+" werden gesendet...");
                 //TODO: Fehler finden -> Irgendein Modul spinnt hier rum
+                console.log("Server: "+room.players[i]);
+                console.log('Server: '+connections[room.players[i].socketIndex]);
                 connections[room.players[i].socketIndex].emit('refresh Players', room.players);
-                console.log("Server: Daten an "+room.players[i].name+" wurden gesendet...");
+                console.log("Server: Daten an "+room.players[i]._name+" wurden gesendet...");
             }
         });
     });
