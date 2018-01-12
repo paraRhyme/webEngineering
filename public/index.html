@@ -12,10 +12,10 @@
     <script language="JavaScript" type="text/javascript" src="JavaScriptFiles/core.js"></script>
     <style>
         #website {
-            display: 1;  <!-- 1 = Ein | None = Aus -->
+            display: none;  <!-- 1 = Ein | None = Aus -->
         }
         #LoginDiv {
-            display: none;     <!-- 1 = Ein | None = Aus -->
+            display: 1;     <!-- 1 = Ein | None = Aus -->
         }
     </style>
 </head>
@@ -52,7 +52,7 @@
         <div id="menue">
             <h2 style="padding-left: 45px"><a onclick="clickMeinProfil()">Mein Profil</a></h2>
             <h2><a onclick="clickSpielregeln()">Spielregeln</a></h2>
-            <h2><a id="roomChooserTab">Raumauswahl</a></h2>
+            <h2><a id="roomChooserTab" onclick="getRooms()">Raumauswahl</a></h2>
             <h2><a onclick="clickOnlineshop()">Onlineshop</a></h2>
         </div>
     </div>
