@@ -13,14 +13,15 @@ h1:hover {
     text-decoration: underline;
 }
 
-h2 {
+#menueHeadline {
     text-decoration: none;
     display:table-cell;
     vertical-align: middle;
     text-align: center;
+    font-weight: bold;
 }
 
-h2 > a {
+#menueHeadline > a {
     position: relative;
     color: black;
     text-decoration: none;
@@ -29,12 +30,12 @@ h2 > a {
     vertical-align: middle;
 }
 
-h2 > a:hover {
+#menueHeadline > a:hover {
     color: darkcyan;
     font-size: 31px;
 }
 
-h2 > a:before {
+#menueHeadline > a:before {
     content: "";
     position: absolute;
     width: 100%;
@@ -49,7 +50,7 @@ h2 > a:before {
     transition: all 0.3s ease-in-out 0s;
 }
 
-h2 > a:hover:before {
+#menueHeadline > a:hover:before {
   visibility: visible;
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
@@ -76,8 +77,8 @@ h4 {
 h5 {
     color: black;
     font-size: 25px;
-    padding-top: 230px;
-    padding-bottom: 230px;
+    padding-top: 200px;
+    padding-bottom: 200px;
 }
 
 div {
@@ -119,12 +120,19 @@ body {
 /* LOGIN STYLING */
 
 #LoginDiv {
-    width: 95%;
-    height: 95%;
+    height: 97%;
+    width: 100%;
+    margin: 0 auto;
+}
+
+#loginHeader {
+    width: 97%;
+    height: 93%;
     background-color: darkgrey;
     margin: 0 auto;
     text-align: center;
     display: 1;
+    margin-bottom:10px;
 }
 
  #userForm {
@@ -142,7 +150,7 @@ body {
 }
 
 #header, #center, #footer {
-	width:97%;
+	width: 97%;
 	margin-top: 0 auto;
 	margin-left: auto;
     margin-right: auto;
@@ -171,7 +179,7 @@ body {
 #scoreboard {
 	float:left;
 	width: 29%;
-	height: 620px;
+	height: 600px;
 	background-color: lightgrey;
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -180,7 +188,7 @@ body {
 #playground {
 	float:right;
 	width:70%;
-	height:620px;
+	height:600px;
 	background-color:darkgrey;
 	margin-top:10px;
 	margin-bottom:10px;

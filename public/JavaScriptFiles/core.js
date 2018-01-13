@@ -49,19 +49,22 @@ $(function(){
         $playground.empty();
         $playground.append('<div id="RoomChooserArea">')
         if(data.length == 0){
-            $playground.append('<h4 style="padding-top:200px text-align:center">Keine Räume gefunden.</h4>');
+            $playground.append('<h4 style="padding-top:200px; text-align:center">Keine Räume gefunden.</h4>');
         }else{
+            $playground.append('</br><h id="roomsCreated">Bis jetzt wurden folgende Räume erstellt welchen du beitreten kannst:</h></br>');
             //TODO: Auflistung der Räume in der GUI
             for(var i = 0; i < data.length; i++){
-                $playground.append('<div class="Room" val="'+data[i]._roomname+'">'+data[i]._roomname+'</div>');
+                $playground.append
+                    ('</br><div class="Room" val="'+data[i]._roomname+'">'+data[i]._roomname+'</div>');
             }
         }
-        $playground.append('</div><div id="RoomChooserAreaCreate">' +
+        $playground.append(
+            '</div><div id="RoomChooserAreaCreate">' +
             '<form id="createRoomForm">' +
             '<input id="roomName">' +
             '<input type="submit" value="Raum erstellen" class="button">' +
             '</form>' +
-            '</div>');  //TODO: Button muss noch mittig
+            '</div>');
 
         var $createRoomForm = $('#createRoomForm');
         $createRoomForm.submit(function(){
@@ -70,7 +73,7 @@ $(function(){
             var check = $roomName.val();
             console.log(check);
             if(check == ""){
-                alert("Bite gib einen Namen für den Raum ein.");
+                alert("Bitte gib einen Namen für den Raum ein.");
             }else{
                 socket.emit('request roomname', check);
                 socket.on('answer roomname', function (data) {
@@ -87,24 +90,26 @@ $(function(){
             console.log("Warum disconnecte ich?");
         })
     });
-
 });
 function getRooms(){
-    console.log("OnClick ausgeführt");
+    console.log("OnClick getRooms ausgeführt");
     socket.emit('get Rooms');
 }
 
-function clickSpielregeln(){
-    console.log("OnClick ausgeführt");
-    alert ("Leider fehlen hier noch die Spielregeln, versuche sie doch bitte über eine Suche bei Google zu finden!");
+function getGameRules(){
+    console.log("OnClick getGameRules ausgeführt");
+    $playground.empty();
+    $playground.append('</div><h2>TEST</h2>');
 }
 
-function clickMeinProfil(){
-    console.log("OnClick ausgeführt");
-    alert ("Leider fehlt hier noch die Integration deines Profils..");
+function getMyProfile(){
+    console.log("OnClick getMyProfile ausgeführt");
+    $playground.empty();
+    $playground.append('</div><h2>TEST</h2>');
 }
 
-function clickOnlineshop(){
-    console.log("OnClick ausgeführt");
-    alert ("Leider fehlt hier noch der Onlineshop, demnächst kannst du hier für Ingame-Währung neue Designs für deine Spielkarten erwerben!");
+function getOnlineShop(){
+    console.log("OnClick getOnlineShop ausgeführt");
+    $playground.empty();
+    $playground.append('</div><h2>TEST</h2>');
 }

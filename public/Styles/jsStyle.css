@@ -16,10 +16,23 @@
 #RoomChooserAreaCreate {
     height: 100%;
     width: 100%;
-    text-align:center;
+    text-align: center;
     bottom: 0;
 }
 
 #createRoomForm {
-    text-align:center;
+    text-align: center;
+}
+
+.Room {
+    height: 40px;
+    width: 100%;
+    text-align: center;
+}
+
+#roomsCreated {
+    color: black;
+    text-align: left;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
