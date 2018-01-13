@@ -97,13 +97,42 @@
 
     class Room {
         constructor(name, player){
+            this.startPlayer = 0;
+            this.playRounds = 0;
+            this.maxRound = 0;
+            this.actualRound = 0;
             this.cardDeck = [];
             this.fullOrPlaying = 0;
             this.roomname = name;
             this.players = [];
             this.players.push(player);
-            this.trumpColour = 'none';
+            this.trumpColour = 'None';
         }
+        set startPlayer(set){
+            this._startPlayer = set;
+        }
+        get startPlayer(){
+            return this._startPlayer;
+        }
+        set playRounds(set){
+            this._playRounds = set;
+        }
+        get playRounds(){
+            return this._playRounds;
+        }
+        set maxRound(set){
+            this._maxRound = set;
+        }
+        get maxRound(){
+            return this._maxRound;
+        }
+        set actualRound(set){
+            this._actualRound = set;
+        }
+        get actualRound(){
+            return this._actualRound;
+        }
+
         addPlayer(player){
             this._players.push(player);
             if(this._players.length == 6){
@@ -142,7 +171,7 @@
             this._trumpColour = set;
         }
         get trumpColour(){
-            return this.trumpColour;
+            return this._trumpColour;
         }
         set cardDeck(set){
             this._cardDeck = set;
@@ -187,6 +216,7 @@
             }else{
                 this._trumpColour = this._cardDeck[0]._colour;
             }
+            console.log("Trumpffarbe: "+this._trumpColour);
         }
     }
 
@@ -316,7 +346,9 @@
             }else{
                 room._fullOrPlaying = 1;
                 console.log("Start Game successfull...");
-                socket.emit('start Game', room);
+                room._maxRound = 1;
+                room._actualRound = 1;
+                room._playRounds = 60 / room._players.length;
                 gameController(room);
             }
         });
@@ -333,17 +365,14 @@
 
         function gameController(room){
             console.log("Initialize Game...");
-            for(var round = 0;round < (60 / room._players.length);round++){
                 room.createCardDeck();
                 room.shuffleCards();
-                room.handRoundCards(round);
+                room.handRoundCards(room._maxRound);
                 room.getTrumpColour();
                 for(var i = 0; i < room._players.length;i++){
+                    connections[room._players[i]._socketIndex].emit('start Game', room);
                     connections[room._players[i]._socketIndex].emit('hand round Cards', room._players[i]._cards);
-                    connections[room._players[i]._socketIndex].emit('hand out TrumpColour', room._trumpColour);
                 }
-
-            }
         }
 
     });

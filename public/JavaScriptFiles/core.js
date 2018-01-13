@@ -1,4 +1,6 @@
 var socket;
+var myName;
+var scoreboardRows;
 $(function(){
     socket = io.connect();
     var $userForm = $('#userForm'); //Form
@@ -9,7 +11,8 @@ $(function(){
      //Textfield
     var $playground = $('#playground');
     var $roomChooserTab = $('#roomChooserTab');
-    var myName = 'default';
+    myName = 'default';
+    scoreboardRows = [];
 
     $userForm.submit(function(e){
         e.preventDefault();
@@ -78,10 +81,11 @@ $(function(){
         alert('Es sind noch nicht genügend Spieler anwesend.');
     });
 
-    socket.on('start game', function(room){
+    socket.on('start Game', function(room){
         console.log("Get successsfull Gamestart...");
         $playground.empty();
         var trumpColour = translateColour(room._trumpColour);
+        console.log(trumpColour);
         $playground.append('<div id="trumpColourArea">Trumpf: '+trumpColour+'</div><div id="enemyArea"></div><div id="selfArea"></div>');
         var index = 0;
         for(var i = 0;i<room._players.length;i++){
@@ -89,19 +93,46 @@ $(function(){
                 index = i;
             }
         }
-        room._players(sortPlayersByIndex(index,room._players));
-        for(var i = 0;i<room._players.length;i++){
-            $('#enemyArea').append('<div class="player" id="player'+(i+1)+'"><div class="playerName" id="player'+(i+1)+'Name">'+room._players[i]._name+'</div><div class="playerCard" id="player'+(i+1)+'Card"></div></div>')
+        var players = sortPlayersByIndex(index,room._players);
+        for(var i = 1;i<room._players.length;i++){
+            $('#enemyArea').append('<div class="player" id="player'+(i+1)+'"><div class="playerName" id="player'+i+'Name">'+players[i]._name+'</div><div class="playerCard" id="player'+(i+1)+'Card"></div></div>')
         }
         $('#selfArea').append('<select id="cardDeck" onchange="chooseCard()"></select>');
+
+        //create Scoreboard
+        var $scoreboard = $('#scoreboard');
+        $scoreboard.append('<table id="scoreboardTable"></table>');
+        var $scoreboardTable = $('#scoreboardTable');
+        for(var i = 0;i<room._playRounds+1;i++){
+            $scoreboardTable.append('<tr></tr>');
+        }
+        scoreboardRows = $scoreboardTable.children();
+        for(var i = 0;i<scoreboardRows.length;i++){
+            for(var j = 0;j<room._players.length+1;j++){
+                if(i == 0){
+                    if(j == 0){
+                        $scoreboardTable.children()[i].append('<th></th>');
+                    }else{
+                        $scoreboardTable.children()[i].append('<th colspan="2">'+room._players[j-1]._name+'</th>')
+                    }
+                }else{
+                    if(j == 0){
+                        $scoreboardTable.children()[i].append('<th>'+(i+1)+'</th>');
+                    }else{
+                        $scoreboardTable.children()[i].append('<td>10</td><td>2</td>')
+                    }
+                }
+            }
+        }
         console.log("GUI placed...");
+
     });
 
     socket.on('hand round Cards', function(cards){
         for(var i = 0;i<cards.length;i++){
             var cardColour = translateColour(cards[i]._colour);
             var cardValue = translateValue(cards[i]._val);
-            var card = cardColour + cardValue;
+            var card = cardColour +' '+ cardValue;
             $('#cardDeck').append('<option value="'+cards[i]+'">'+card+'</option>');
         }
     });
@@ -110,8 +141,9 @@ $(function(){
 
 function chooseCard(){
     //TODO: Eingabevalidierung
-    var choosenCard = $('#cardDeck').options[$('#cardDeck').selectedIndex].value;
-    $('#cardDeck').delete($('#cardDeck').selectedIndex);
+    var $select = $('#cardDeck');
+    var choosenCard = $select.options[$select.selectedIndex].value;
+    $select.delete($select.selectedIndex);
     socket.emit('play Card', choosenCard);
 }
 
