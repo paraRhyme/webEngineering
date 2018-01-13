@@ -119,19 +119,12 @@ body {
 /* LOGIN STYLING */
 
 #LoginDiv {
-    width: 100%;
-    height: 97%;
-    margin: 0 auto;
-    text-align: center;
-    display: 1;
-}
-
-#userFormArea {
-    width: 97%;
-    height: 96%;
+    width: 95%;
+    height: 95%;
     background-color: darkgrey;
     margin: 0 auto;
     text-align: center;
+    display: 1;
 }
 
  #userForm {
