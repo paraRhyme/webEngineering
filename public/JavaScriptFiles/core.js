@@ -49,7 +49,7 @@ $(function(){
         $playground.empty();
         $playground.append('<div id="RoomChooserArea">')
         if(data.length == 0){
-            $playground.append('Keine Räume gefunden.'); //TODO: Anzeige sollte mittig sein
+            $playground.append('<h4 style="padding-top:200px text-align:center">Keine Räume gefunden.</h4>');
         }else{
             //TODO: Auflistung der Räume in der GUI
             for(var i = 0; i < data.length; i++){
@@ -61,7 +61,7 @@ $(function(){
             '<input id="roomName">' +
             '<input type="submit" value="Raum erstellen" class="button">' +
             '</form>' +
-            '</div>'); //TODO: Button muss noch mittig
+            '</div>');  //TODO: Button muss noch mittig
 
         var $createRoomForm = $('#createRoomForm');
         $createRoomForm.submit(function(){
@@ -93,15 +93,18 @@ function getRooms(){
     console.log("OnClick ausgeführt");
     socket.emit('get Rooms');
 }
-/* bisschen Scheiß von Richard */
+
 function clickSpielregeln(){
-        alert ("Leider fehlen hier noch die Spielregeln, versuche sie doch bitte über eine Suche bei Google zu finden! (;");
+    console.log("OnClick ausgeführt");
+    alert ("Leider fehlen hier noch die Spielregeln, versuche sie doch bitte über eine Suche bei Google zu finden!");
 }
 
 function clickMeinProfil(){
-        alert ("Leider fehlt hier noch die Integration deines Profils..");
+    console.log("OnClick ausgeführt");
+    alert ("Leider fehlt hier noch die Integration deines Profils..");
 }
 
 function clickOnlineshop(){
-        alert ("Leider fehlt hier noch der Onlineshop, demnächst kannst du hier für Ingame-Währung neue Designs für deine Spielkarten erwerben!");
+    console.log("OnClick ausgeführt");
+    alert ("Leider fehlt hier noch der Onlineshop, demnächst kannst du hier für Ingame-Währung neue Designs für deine Spielkarten erwerben!");
 }
