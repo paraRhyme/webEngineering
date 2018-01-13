@@ -13,13 +13,36 @@
     var users = [];
     var rooms = [];
 
+    class Card {
+        constructor(colour, val){
+            this.colour = colour;
+            this.val = val;
+        }
+
+        set colour(set){
+            this._colour = set;
+        }
+        get colour(){
+            return this._colour;
+        }
+
+        set val(set){
+            this._val = set;
+        }
+        get val(){
+            return this._val;
+        }
+    }
+
+    //0 = Narr, 14 = Wizard
+
     class Player {
         constructor(name, socket){
             this.name = name;
             this.socketIndex = socket;
             this.cards = [];
-            this.points = 0;
-            this.prediction = 0;
+            this.points = [];
+            this.predictions = [];
             this.tricks = 0;
         }
         set cards(cards){
@@ -48,14 +71,17 @@
             return this._points;
         }
         addPoints(val){
-            this._points += val;
+            this._points.push(this._points[this._points.length - 1] + val);
         }
 
-        set prediction(set){
-            this._prediction = set;
+        set predictions(set){
+            this._predictions = set;
         }
-        get prediction(){
-            return this.prediction;
+        get predictions(){
+            return this._predictions;
+        }
+        addPrediction(pred){
+            this._predictions.push(pred);
         }
 
         set tricks(set){
@@ -71,15 +97,33 @@
 
     class Room {
         constructor(name, player){
+            this.cardDeck = [];
+            this.fullOrPlaying = 0;
             this.roomname = name;
             this.players = [];
             this.players.push(player);
+            this.trumpColour = 'none';
         }
         addPlayer(player){
-            players.push(player);
+            this._players.push(player);
+            if(this._players.length == 6){
+                this._fullOrPlaying = 1;
+            }
         }
-        removePlayer(player){
-            players.splice(players.indexOf(player),1);
+        removePlayer(playername){
+            for(var i = 0;i< this._players.length;i++){
+                if(this._players[i]._name == playername){
+                    this._players.splice(this._players[i],1);
+                }
+            }
+            this._fullOrPlaying = 0;
+        }
+
+        set fullOrPlaying(set){
+            this._fullOrPlaying = set;
+        }
+        get fullOrPlaying(){
+            return this._fullOrPlaying;
         }
 
         set roomname(set){
@@ -93,6 +137,56 @@
         }
         get players(){
             return this._players;
+        }
+        set trumpColour(set){
+            this._trumpColour = set;
+        }
+        get trumpColour(){
+            return this.trumpColour;
+        }
+        set cardDeck(set){
+            this._cardDeck = set;
+        }
+        get cardDeck() {
+            return this._cardDeck;
+        }
+        createCardDeck(){
+            this._cardDeck = [new Card("red",0), new Card("red",1), new Card("red",2), new Card("red",3), new Card("red",4), new Card("red",5), new Card("red",6), new Card("red",7), new Card("red",8), new Card("red",9), new Card("red",10), new Card("red",11), new Card("red",12), new Card("red",13), new Card("red",14), new Card("blue",0), new Card("blue",1), new Card("blue",2), new Card("blue",3), new Card("blue",4), new Card("blue",5), new Card("blue",6), new Card("blue",7), new Card("blue",8), new Card("blue",9), new Card("blue",10), new Card("blue",11), new Card("blue",12), new Card("blue",13), new Card("blue",14), new Card("green",0), new Card("green",1), new Card("green",2), new Card("green",3), new Card("green",4), new Card("green",5), new Card("green",6), new Card("green",7), new Card("green",8), new Card("green",9), new Card("green",10), new Card("green",11), new Card("green",12), new Card("green",13), new Card("green",14), new Card("yellow",0), new Card("yellow",1), new Card("yellow",2), new Card("yellow",3), new Card("yellow",4), new Card("yellow",5), new Card("yellow",6), new Card("yellow",7), new Card("yellow",8), new Card("yellow",9), new Card("yellow",10), new Card("yellow",11), new Card("yellow",12), new Card("yellow",13), new Card("yellow",14)];
+        }
+        shuffleCards() {
+            var currentIndex = this._cardDeck.length, temporaryValue, randomIndex ;
+
+            // While there remain elements to shuffle...
+            while (0 !== currentIndex) {
+
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+
+                // And swap it with the current element.
+                temporaryValue = this._cardDeck[currentIndex];
+                this._cardDeck[currentIndex] = this._cardDeck[randomIndex];
+                this._cardDeck[randomIndex] = temporaryValue;
+            }
+        }
+        handRoundCards(number){
+            for(var i =0;i<this.players.length;i++){
+                var cards = [];
+                for(var j = 0; j < number;j++){
+                    cards.push(this.cardDeck[0]);
+                    this.cardDeck.splice(this.cardDeck[0],1);
+                }
+                this.players[i]._cards = cards;
+            }
+        }
+        getTrumpColour(){
+            if(this.cardDeck.length == 0){
+                this._trumpColour = 'None';
+            }else if(this._cardDeck[0]._val == 0) {
+                this._trumpColour = 'None';
+            }else{
+                this._trumpColour = this._cardDeck[0]._colour;
+            }
         }
     }
 
@@ -119,6 +213,18 @@
         //Disconnect
         socket.on('disconnect', function(data){
             var index = connections.indexOf(socket);
+            for(var i = 0;i<rooms.length;i++){
+                for(var j = 0;j<rooms[i]._players.length;j++){
+                    if(rooms[i]._players[j]._name == users[index]){
+                        rooms[i].removePlayer(users[index]);
+                        var room = rooms[i];
+                        for(var x = 0; x < room._players.length;x++){
+                            connections[room._players[x]._socketIndex].emit('refresh Players', room._players);
+                        }
+                        console.log(room._players);
+                    }
+                }
+            }
             connections.splice(index, 1);
             users.splice(index, 1);
             console.log('Disconnected: %s sockets connected', connections.length);
@@ -140,8 +246,8 @@
                 }
             }
             if(error == false) {
-                console.log("Server: Name einzigartig...")
-                users.push(data);
+                console.log("Server: Name einzigartig...");
+                users[connections.indexOf(socket)] = data;
                 socket.emit('successfull Username');
             }
         });
@@ -163,6 +269,7 @@
 
         //join Room
         socket.on('join Room', function(roomName){
+            console.log("Server: Join-Anfrage");
             var index = 0;
             for(var i = 0;i<rooms.length;i++){
                 if(rooms[i].roomname == roomName){
@@ -170,7 +277,7 @@
                 }
             }
             var room = rooms[index];
-            room.addPlayer(new Player(users[users.indexOf(connections.indexOf(socket))],connections.indexOf(socket)));
+            room.addPlayer(new Player(users[connections.indexOf(socket)],connections.indexOf(socket)));
             for(var i = 0; i < room.players.length;i++){
                 connections[room.players[i].socketIndex].emit('refresh Players', room.players);
             }
@@ -184,37 +291,61 @@
 
         //redundant roomName?
         socket.on('request roomname', function(data){
-            var result = true;
+            var result = 1;
             if(rooms.length >=1){
                 for(var i = 0;i < rooms.length;i++){
-                    if (rooms[i] == data){
-                        result = false; //TODO: funktion überprüfen
+                    if (rooms[i]._roomname == data){
+                        result = 0; //TODO: funktion überprüfen
                     }
                 }
             }
-            socket.emit('answer roomname', result);
+            socket.emit('answer roomname', { res: result});
         });
 
         socket.on('request Players', function(roomName){
-            console.log("Server: Raumname: "+roomName);
+            var room = getRoom(roomName);
+            socket.emit('refresh Players', room.players);
+        });
+
+        socket.on('start Game', function(roomname){
+            console.log("Start Game...");
+            var room =  getRoom(roomname);
+            if(room._players.length < 3){
+                console.log("Throw start Game error...");
+                socket.emit('start Game error');
+            }else{
+                room._fullOrPlaying = 1;
+                console.log("Start Game successfull...");
+                socket.emit('start Game', room);
+                gameController(room);
+            }
+        });
+
+        function getRoom(roomName){
             var index = 0;
             for(var i = 0;i<rooms.length;i++){
-                if(rooms[i].roomname == roomName){
+                if(rooms[i]._roomname == roomName){
                     index = i;
                 }
             }
-            var room = rooms[index];
-            console.log(room);
-            console.log('Server: Raumindex: '+index);
-            for(var i = 0; i < room.players.length;i++){
-                console.log("server: Daten an "+room.players[i]._name+" werden gesendet...");
-                //TODO: Fehler finden -> Irgendein Modul spinnt hier rum
-                console.log("Server: "+room.players[i]);
-                console.log('Server: '+connections[room.players[i].socketIndex]);
-                connections[room.players[i].socketIndex].emit('refresh Players', room.players);
-                console.log("Server: Daten an "+room.players[i]._name+" wurden gesendet...");
+            return rooms[index];
+        }
+
+        function gameController(room){
+            console.log("Initialize Game...");
+            for(var round = 0;round < (60 / room._players.length);round++){
+                room.createCardDeck();
+                room.shuffleCards();
+                room.handRoundCards(round);
+                room.getTrumpColour();
+                for(var i = 0; i < room._players.length;i++){
+                    connections[room._players[i]._socketIndex].emit('hand round Cards', room._players[i]._cards);
+                    connections[room._players[i]._socketIndex].emit('hand out TrumpColour', room._trumpColour);
+                }
+
             }
-        });
+        }
+
     });
 
 

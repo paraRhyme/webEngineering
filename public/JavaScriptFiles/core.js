@@ -9,6 +9,7 @@ $(function(){
      //Textfield
     var $playground = $('#playground');
     var $roomChooserTab = $('#roomChooserTab');
+    var myName = 'default';
 
     $userForm.submit(function(e){
         e.preventDefault();
@@ -17,6 +18,7 @@ $(function(){
         }else {
             console.log('Eingabe Client: ' + $username.val());
             socket.emit('new User', $username.val());
+            myName = $username.val();
             $username.val('');
         }
     });
@@ -40,8 +42,10 @@ $(function(){
 
     socket.on('refresh Players', function(data){
         console.log("Refresh Players");
+        $('#playerArea').empty();
         for(var i = 0; i < data.length; i++){
             //TODO: Alle Spielernamen müssen der Liste hinzugefügt werden
+            $('#playerArea').append('<div class="player">'+data[i]._name+'</div>');
         }
     });
 
@@ -52,43 +56,144 @@ $(function(){
             $playground.append('Keine Räume gefunden.'); //TODO: Anzeige sollte mittig sein
         }else{
             //TODO: Auflistung der Räume in der GUI
+            var roomsExist = false;
             for(var i = 0; i < data.length; i++){
-                $playground.append('<div class="Room" val="'+data[i]._roomname+'">'+data[i]._roomname+'</div>');
+                if(data[i]._fullOrPlaying == 0) {
+                    roomsExist = true;
+                    $playground.append('<div class="Room" val="' + data[i]._roomname + '" onclick="joinRoom(\'' + data[i]._roomname + '\')">' + data[i]._roomname + '</div>');
+                }
+            }
+            if(roomsExist == false){
+                $playground.append('Keine Räume gefunden.');
             }
         }
-        $playground.append('</div><div id="RoomChooserAreaCreate">' +
-            '<form id="createRoomForm">' +
+        $playground.append('</div><div id="RoomChooserAreaCreate" class="confirmArea">' +
             '<input id="roomName">' +
-            '<input type="submit" value="Raum erstellen" class="button">' +
-            '</form>' +
             '</div>'); //TODO: Button muss noch mittig
 
-        var $createRoomForm = $('#createRoomForm');
-        $createRoomForm.submit(function(){
-            console.log("Raum erstellen Button geklickt");
-            var $roomName = $('#roomName');
-            var check = $roomName.val();
-            console.log(check);
-            if(check == ""){
-                alert("Bite gib einen Namen für den Raum ein.");
-            }else{
-                socket.emit('request roomname', check);
-                socket.on('answer roomname', function (data) {
-                    if (data) {
-                        console.log("Habe Antwort auf Raumnamen bekommen: " + data);
-                        socket.emit('new Room', check);
-                        //TODO: RaumerstellungsGUIladen
-                        socket.emit('request Players', check);
-                    } else {
-                        alert('Der gewählte Name ist schon vergeben.');
-                    }
-                });
+        $('#RoomChooserAreaCreate').append('<button id="createRoomButton" value="Raum erstellen" class="button" onclick="createRoom()">Raum erstellen</button>');
+    });
+
+    socket.on('start Game error', function(){
+        alert('Es sind noch nicht genügend Spieler anwesend.');
+    });
+
+    socket.on('start game', function(room){
+        console.log("Get successsfull Gamestart...");
+        $playground.empty();
+        var trumpColour = translateColour(room._trumpColour);
+        $playground.append('<div id="trumpColourArea">Trumpf: '+trumpColour+'</div><div id="enemyArea"></div><div id="selfArea"></div>');
+        var index = 0;
+        for(var i = 0;i<room._players.length;i++){
+            if(room._players[i]._name == myName) {
+                index = i;
             }
-            console.log("Warum disconnecte ich?");
-        })
+        }
+        room._players(sortPlayersByIndex(index,room._players));
+        for(var i = 0;i<room._players.length;i++){
+            $('#enemyArea').append('<div class="player" id="player'+(i+1)+'"><div class="playerName" id="player'+(i+1)+'Name">'+room._players[i]._name+'</div><div class="playerCard" id="player'+(i+1)+'Card"></div></div>')
+        }
+        $('#selfArea').append('<select id="cardDeck" onchange="chooseCard()"></select>');
+        console.log("GUI placed...");
+    });
+
+    socket.on('hand round Cards', function(cards){
+        for(var i = 0;i<cards.length;i++){
+            var cardColour = translateColour(cards[i]._colour);
+            var cardValue = translateValue(cards[i]._val);
+            var card = cardColour + cardValue;
+            $('#cardDeck').append('<option value="'+cards[i]+'">'+card+'</option>');
+        }
     });
 
 });
+
+function chooseCard(){
+    //TODO: Eingabevalidierung
+    var choosenCard = $('#cardDeck').options[$('#cardDeck').selectedIndex].value;
+    $('#cardDeck').delete($('#cardDeck').selectedIndex);
+    socket.emit('play Card', choosenCard);
+}
+
+function sortPlayersByIndex(index,players){
+    var newArray = [];
+    console.log("Altes Array: "+players+" -> "+players[index]+" soll erster sein");
+    for(var i = index;i<players.length;i++){
+        newArray.push(players[i]);
+    }
+    for(var i = 0;i<index;i++){
+        newArray.push(players[i]);
+    }
+    console.log(newArray);
+    return newArray;
+}
+
+function translateValue(val){
+    switch (val) {
+        case 0:
+            return 'Narr';
+        case 14:
+            return 'Zauberer';
+        default: return ''+val;
+    }
+}
+
+function translateColour(colour){
+    switch (colour) {
+        case 'None':
+            return 'Kein Trumpf';
+        case 'red' :
+            return 'Rot';
+        case 'blue' :
+            return 'Blau';
+        case 'green' :
+            return 'Grün';
+        case 'yellow' :
+            return 'Gelb';
+        default: return 'None';
+    }
+}
+
+function joinRoom(val){
+    console.log(val);
+    socket.emit('join Room', val);
+    var $playground = $('#playground');
+    $playground.empty();
+    $playground.append('<div id="Lobby"><div id="LobbyHeadline"><h2>'+ val +'</h2></div><div id="playerArea"></div><div id="LobbyStartArea"></div></div>');
+    socket.emit('request Players', val);
+}
+
+function createRoom(){
+    var $playground = $('#playground');
+    console.log("Raum erstellen Button geklickt");
+    var $roomName = $('#roomName');
+    var check = $roomName.val();
+    console.log(check);
+    if(check == ""){
+        alert("Bite gib einen Namen für den Raum ein.");
+    }else{
+        socket.emit('request roomname', check);
+        socket.on('answer roomname', function (data) {
+            if (data.res == 1) {
+                console.log("Habe Antwort auf Raumnamen bekommen: " + data.res);
+                socket.emit('new Room', check);
+                //TODO: RaumerstellungsGUIladen
+                $playground.empty();
+                $playground.append('<div id="Lobby"><div id="LobbyHeadline"><h2>'+ check +'</h2></div><div id="playerArea"></div><div id="LobbyStartArea" class="confirmArea"><button id="startGame" class="button" onclick="startGame(\''+check+'\')">Start</button></div></div>');
+                socket.emit('request Players', check);
+            } else {
+                alert('Der gewählte Name ist schon vergeben.');
+            }
+        });
+    }
+    console.log("Warum disconnecte ich?");
+}
+
+function startGame(roomname){
+    console.log("Start Game");
+    socket.emit('start Game', roomname);
+}
+
 function getRooms(){
     console.log("OnClick ausgeführt");
     socket.emit('get Rooms');

@@ -227,7 +227,7 @@ body {
     background: #3cb0fd;
 }
 
-#RoomChooserAreaCreate {
+.confirmArea {
     position: absolute;
     bottom: 0;
 }
