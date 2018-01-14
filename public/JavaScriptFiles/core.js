@@ -241,15 +241,21 @@ function getRooms(){
     console.log("OnClick ausgeführt");
     socket.emit('get Rooms');
 }
-/* bisschen Scheiß von Richard */
-function clickSpielregeln(){
-        alert ("Leider fehlen hier noch die Spielregeln, versuche sie doch bitte über eine Suche bei Google zu finden! (;");
+
+function getGameRules(){
+    console.log("OnClick getGameRules ausgeführt");
+    $playground.empty();
+    $playground.append('</div><div id="gameRules"> SPIELREGELN REIN BZW FÜLLTEXT</div>');
 }
 
-function clickMeinProfil(){
-        alert ("Leider fehlt hier noch die Integration deines Profils..");
+function getMyProfile(){
+    console.log("OnClick getMyProfile ausgeführt");
+    $playground.empty();
+    $playground.append('</div><div id="myProfile">MEIN PROFIL</div>');
 }
 
-function clickOnlineshop(){
-        alert ("Leider fehlt hier noch der Onlineshop, demnächst kannst du hier für Ingame-Währung neue Designs für deine Spielkarten erwerben!");
+function getOnlineShop(){
+    console.log("OnClick getOnlineShop ausgeführt");
+    $playground.empty();
+    $playground.append('</div><div id="onlineShop">ONLINESHOP</div>');
 }
