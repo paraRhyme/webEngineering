@@ -1,6 +1,7 @@
 var socket;
 var myName;
 var scoreboardRows;
+var $playground;
 $(function(){
     socket = io.connect();
     var $userForm = $('#userForm'); //Form
@@ -9,7 +10,7 @@ $(function(){
     var $mainArea = $('#website');
     var $createRoomButton = $('#createRoomButton'); //Button
      //Textfield
-    var $playground = $('#playground');
+    $playground = $('#playground');
     var $roomChooserTab = $('#roomChooserTab');
     myName = 'default';
     scoreboardRows = [];
@@ -207,7 +208,6 @@ function joinRoom(val){
 }
 
 function createRoom(){
-    var $playground = $('#playground');
     console.log("Raum erstellen Button geklickt");
     var $roomName = $('#roomName');
     var check = $roomName.val();
