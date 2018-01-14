@@ -36,6 +36,7 @@ $(function(){
         console.log("Müsste jetzt die GUI ändern")
         $loginDiv.hide();
         $mainArea.show();
+        $playground.append('<h2>Herzlich Willkommen, '+myName+'!</h2><div id="welcome">Wenn du ein Spiel spielen willst kannst du unter Raumauswahl einfach einen Raum erstellen oder einem beitreten. <br \>Viel Spaß!</div>');
     });
 
     $createRoomButton.submit(function(e){

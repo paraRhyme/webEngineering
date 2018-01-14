@@ -65,3 +65,11 @@ table, th, td {
     text-align: center;
     font-size: 20px;
 }
+
+#welcome {
+    height: 70%;
+    width: 100%;
+    padding-top: 100px;
+    text-align: center;
+    font-size: 20px;
+}
