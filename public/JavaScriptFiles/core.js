@@ -104,22 +104,26 @@ $(function(){
         $scoreboard.append('<table id="scoreboardTable"></table>');
         var $scoreboardTable = $('#scoreboardTable');
         for(var i = 0;i<room._playRounds+1;i++){
-            $scoreboardTable.append('<tr></tr>');
-        }
-        scoreboardRows = $scoreboardTable.children();
-        for(var i = 0;i<scoreboardRows.length;i++){
             for(var j = 0;j<room._players.length+1;j++){
                 if(i == 0){
                     if(j == 0){
-                        $scoreboardTable.children()[i].append('<th></th>');
+                        $scoreboardTable.append('<tr>');
+                        $scoreboardTable.append('<th></th>');
+                    }else if(j == room._players.length - 1){
+                        $scoreboardTable.append('<th colspan="2">'+room._players[j-1]._name+'</th>');
+                        $scoreboardTable.append('</tr>');
                     }else{
-                        $scoreboardTable.children()[i].append('<th colspan="2">'+room._players[j-1]._name+'</th>')
+                        $scoreboardTable.append('<th colspan="2">'+room._players[j-1]._name+'</th>');
                     }
                 }else{
                     if(j == 0){
-                        $scoreboardTable.children()[i].append('<th>'+i+'</th>');
+                        $scoreboardTable.append('<tr>');
+                        $scoreboardTable.append('<th>'+i+'</th>');
+                    }else if(j == room._players.length - 1){
+                        $scoreboardTable.append('<td>10</td><td>2</td>');
+                        $scoreboardTable.append('</tr>');
                     }else{
-                        $scoreboardTable.children()[i].append('<td>10</td><td>2</td>')
+                        $scoreboardTable.append('<td>10</td><td>2</td>');
                     }
                 }
             }
