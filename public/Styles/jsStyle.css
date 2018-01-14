@@ -4,7 +4,7 @@
     font-family: Joti One, cursive;
     font-size: 20px;
     margin-left: 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 10 20 10 20;
 }
 
@@ -16,17 +16,15 @@
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
+    text-align: center;
 }
 
 #RoomChooserAreaCreate {
-    height: 100%;
+    height: auto;
     width: 100%;
     text-align: center;
-    bottom: 0;
-}
-
-#createRoomForm {
-    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 10px !important; /* Textfeld + Button wollen nicht runter? */
 }
 
 .Room {
@@ -38,24 +36,32 @@ table, th, td {
 #roomsCreated {
     color: black;
     text-align: left;
-    margin-bottom: 20px;
-    margin-top: 20px;
 }
 
 #myProfile {
     height: 100%;
     width: 100%;
+    padding-top: 100px;
     text-align: center;
+    font-size: 20px;
 }
 
 #gameRules {
-    height: 100%;
+    height: 70%;
     width: 100%;
+    padding-top: 100px;
+    text-align: center;
+    font-size: 20px;
+}
+
+#quelleSpielregeln {
     text-align: center;
 }
 
 #onlineShop {
     height: 100%;
     width: 100%;
+    padding-top: 100px;
     text-align: center;
+    font-size: 20px;
 }

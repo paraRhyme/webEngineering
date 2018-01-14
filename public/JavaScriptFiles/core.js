@@ -57,23 +57,24 @@ $(function(){
         $playground.empty();
         $playground.append('<div id="RoomChooserArea">')
         if(data.length == 0){
-            $playground.append('Keine Räume gefunden.'); //TODO: Anzeige sollte mittig sein
+            $playground.append('Keine Räume gefunden.');
         }else{
+
             //TODO: Auflistung der Räume in der GUI
             var roomsExist = false;
             for(var i = 0; i < data.length; i++){
                 if(data[i]._fullOrPlaying == 0) {
                     roomsExist = true;
-                    $playground.append('<div class="Room" val="' + data[i]._roomname + '" onclick="joinRoom(\'' + data[i]._roomname + '\')">' + data[i]._roomname + '</div>');
+                    $playground.append('</br><div class="Room" val="' + data[i]._roomname + '" onclick="joinRoom(\'' + data[i]._roomname + '\')">' + data[i]._roomname + '</div>');
                 }
             }
             if(roomsExist == false){
-                $playground.append('Keine Räume gefunden.');
+                $playground.append('</br>Keine Räume gefunden.</br>');
             }
         }
         $playground.append('</div><div id="RoomChooserAreaCreate" class="confirmArea">' +
             '<input id="roomName" class="textfeld">' +
-            '</div>'); //TODO: Button muss noch mittig
+            '</div>');
 
         $('#RoomChooserAreaCreate').append('<button id="createRoomButton" value="Raum erstellen" class="button" onclick="createRoom()">Raum erstellen</button>');
     });
@@ -238,24 +239,25 @@ function startGame(roomname){
 }
 
 function getRooms(){
-    console.log("OnClick ausgeführt");
+    console.log("OnClick getRooms ausgeführt");
     socket.emit('get Rooms');
 }
 
 function getGameRules(){
     console.log("OnClick getGameRules ausgeführt");
     $playground.empty();
-    $playground.append('</div><div id="gameRules"> SPIELREGELN REIN BZW FÜLLTEXT</div>');
+    $playground.append('</div><div id="gameRules">Spielregeln</br></br> - Jeder bekommt in der ersten Runde eine Karte, in der zweiten Runde zwei Karten, usw. </br></br> - Vor dem jeweiligen Rundenbeginn muss jeder Spieler vorhersagen, wie viele </br> Stiche er mit seinem Blatt erzielen wird. </br></br> - Die zuerst ausgespielte Farbe muss bedient werden. Wer nicht bedienen kann, </br> muss abwerfen oder trumpfen. </br></br> - Acht Sonderkarten sind im Spiel: vier Zauberer und vier Narren. Ein Narr gewinnt </br> niemals einen Stich, der Zauberer aber auf jeden Fall. </br></br> - Wer seine Vorhersage erfüllt, erhält Pluspunkte, ansonsten Minuspunkte. </br></br> - Wer am Ende die meisten Punkte hat, gewinnt. </br> </br></div>');
+    $playground.append('</div><div id="quelleSpielregeln"><a href="https://www.amigo-spiele.de/spiel/wizard#1441873869588-cfaee8f1-36b0" target="_blank">      Quelle</a></div>');
 }
 
 function getMyProfile(){
     console.log("OnClick getMyProfile ausgeführt");
     $playground.empty();
-    $playground.append('</div><div id="myProfile">MEIN PROFIL</div>');
+    $playground.append('</div><div id="myProfile">Mein Profil</br></br>Leider konnte das Ziel mit der Auflistung von Profilen sowie Eigenschaften </br> des Spielers noch nicht verwirklicht werden, </br> dies soll allerdings folgen falls dieses Projekt weiter geführt wird. </br> </br> Wenn dies der Fall ist, soll hier die Möglichkeit geboten werden </br> Eigenschaften eines Spielers einzusehen </br>(z.B. Name, Geburtsdatum, Sieg-Quote, Punkte)</div>');
 }
 
 function getOnlineShop(){
     console.log("OnClick getOnlineShop ausgeführt");
     $playground.empty();
-    $playground.append('</div><div id="onlineShop">ONLINESHOP</div>');
+    $playground.append('</div><div id="onlineShop">Onlineshop</br></br>Leider konnte das Ziel mit der Integration eines Onlineshop noch nicht verwirklicht werden, </br> dies soll allerdings folgen falls dieses Projekt weiter geführt wird. </br> </br> Wenn dies der Fall ist, soll hier die Möglichkeit geboten werden </br> um exklusive Designs für seine Karten zu erwerben.</div>');
 }

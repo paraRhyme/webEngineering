@@ -1,3 +1,7 @@
+.textfield {
+ /* textfeld designen */
+}
+
 h1 {
     color:white;
     font-size:40px;
@@ -71,23 +75,19 @@ h3:hover {
 h4 {
     color: black;
     font-size: 20px;
-    padding-top: 10px;
+    padding-top: 15px;
 }
 
 h5 {
     color: black;
     font-size: 25px;
-    padding-top: 200px;
-    padding-bottom: 200px;
+    padding-top: 100px;
+    padding-bottom: 100px;
 }
 
 div {
     border-radius: 5px;
     display: table;
-}
-
-table {
-    text-align: center;
 }
 
 p {
@@ -119,26 +119,37 @@ body {
 
 /* LOGIN STYLING */
 
-#LoginDiv {
+ #LoginDiv {
     height: 97%;
     width: 100%;
     margin: 0 auto;
 }
 
-#loginHeader {
+ #loginHeader {
     width: 97%;
     height: 93%;
     background-color: darkgrey;
     margin: 0 auto;
     text-align: center;
     display: 1;
-    margin-bottom:10px;
+    margin-bottom: 10px;
 }
 
  #userForm {
     text-align: center;
     align: center;
     color: white;
+}
+
+ #footerLogin {
+	height: 30px;
+	background-color: darkcyan;
+	clear: both;
+}
+
+ #footertextLogin {
+    padding-left: 20px;
+    text-align: left;
 }
 
 /* WEBSITE STYLING */
@@ -149,7 +160,7 @@ body {
 	display: none;
 }
 
-#header, #center, #footerLogin {
+#header, #center, #footer, #footerLogin {
 	width: 97%;
 	margin-top: 0 auto;
 	margin-left: auto;
@@ -187,11 +198,11 @@ body {
 
 #playground {
 	float:right;
-	width:70%;
-	height:600px;
-	background-color:darkgrey;
-	margin-top:10px;
-	margin-bottom:10px;
+	width: 70%;
+	height: 600px;
+	background-color: darkgrey;
+	margin-top: 10px;
+	margin-bottom: 10px;
     position: relative;
 }
 
@@ -212,38 +223,9 @@ body {
     height: 200px;
     background-color: white;
     border-radius: none;
-    /* display:table-cell;
-    vertical-align: bottom; */
 }
 
-.textfield {
- /* textfeld designen */
-}
-
-#footerLogin {
-	height:30px;
-	background-color:darkcyan;
-	clear:both;
-}
-#footer {
-    height:30px;
-    background-color:darkcyan;
-    clear:both;
-}
-
- #footertextLogin {
-    padding-left: 20px;
-    text-align: left;
-}
-
-#footertext {
-    padding-left: 20px;
-    text-align: left;
-}
-
-/* TESTZEUG */
-
-#cards div {
+ #cards div {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 0;
@@ -252,10 +234,22 @@ body {
     width: 150px;
     height: 20px;
     text-align: center;
-    transition: height 2s ease-in-out;
+    transition: height 1s ease-in-out;
 }
 
-#cards div:hover {
+ #cards div:hover {
     background-color: white;
     height: 100px;
+}
+
+ #footer {
+    height: 30px;
+    width: 97%;
+    background-color: darkcyan;
+    clear: both;
+}
+
+ #footertext {
+    padding-left: 20px;
+    text-align: left;
 }
