@@ -20,14 +20,20 @@
         <!-- LOGIN ---------------------------------------------------------------->
 
     <div id="LoginDiv">
-            <form id="userForm">
-                <img src="Images/icon.png" width="250" height="250" style="padding-top:50px" alt="wizard hat">
-                <h5 style="color:darkcyan; padding-top:20px; padding-bottom:100px">Hallo Zauberlehrling und willkommen bei Wizard!</h5>
-                <label style="padding-right:20px">Bitte vergib nun einen Benutzernamen welchen du im Spiel nutzen möchtest:</label>
-                <input id="username"></input> </br> </br>
-                <input class="button" type="submit" value="Login" />
-            </form>
+        <div id="loginHeader">
+        <form id="userForm">
+            <img src="Images/icon.png" width="250" height="250" style="padding-top:50px" alt="wizard hat">
+            <h5 style="color:darkcyan; padding-top:20px; padding-bottom:100px">Hallo Zauberlehrling und willkommen bei Wizard!</h5>
+            <label style="padding-right:20px">Bitte vergib nun einen Benutzernamen welchen du im Spiel nutzen möchtest:</label>
+            <input id="username"></input> </br> </br>
+            <input class="button" type="submit" value="Login" />
+        </form>
+        </div>
+        <div id="footer">
+            <p id="footertext">Web Engineering I | Projektmitglieder: Jonas Kappa, Maximilian Lehmann, Richard Vohmann</p>
+        </div>
     </div>
+
 
         <!-- START WEBSITE --------------------------------------------------------->
 
@@ -37,16 +43,16 @@
 
         <div id="header">
             <div id="logo">
-                <p id=logotext>
+                <p id="logotext">
                     <img src="Images/icon.png" width="90" height="90" alt="wizard hat">
                 <h1><a href="https://www.amigo-spiele.de/spiel/wizard" target="_blank">Wizard</a></h1>
                 </p>
             </div>
             <div id="menue">
-                <h2 style="padding-left: 45px"><a onclick="clickMeinProfil()">Mein Profil</a></h2>
-                <h2><a onclick="clickSpielregeln()">Spielregeln</a></h2>
-                <h2><a id="roomChooserTab" onclick="getRooms()">Raumauswahl</a></h2>
-                <h2><a onclick="clickOnlineshop()">Onlineshop</a></h2>
+                <h id="menueHeadline" style="padding-left: 45px"><a onclick="getMyProfile()">Mein Profil</a></h>
+                <h id="menueHeadline"><a onclick="getGameRules()">Spielregeln</a></h>
+                <h id="menueHeadline"><a onclick="getRooms()">Raumauswahl</a></h> <!-- id="roomChooserTab Jonas*/ -->
+                <h id="menueHeadline"><a onclick="getOnlineShop()">Onlineshop</a></h>
             </div>
         </div>
 
