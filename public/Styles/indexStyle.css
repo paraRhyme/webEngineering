@@ -149,7 +149,7 @@ body {
 	display: none;
 }
 
-#header, #center, #footer {
+#header, #center, #footerLogin {
 	width: 97%;
 	margin-top: 0 auto;
 	margin-left: auto;
@@ -220,13 +220,13 @@ body {
     margin-right: 20px
 }
 
-#footer {
+#footerLogin {
 	height:30px;
 	background-color:darkcyan;
 	clear:both;
 }
 
- #footertext {
+ #footertextLogin {
     padding-left: 20px;
     text-align: left;
 }

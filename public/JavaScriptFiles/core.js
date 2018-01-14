@@ -71,7 +71,7 @@ $(function(){
             }
         }
         $playground.append('</div><div id="RoomChooserAreaCreate" class="confirmArea">' +
-            '<input id="roomName">' +
+            '<input id="roomName" class="textfeld">' +
             '</div>'); //TODO: Button muss noch mittig
 
         $('#RoomChooserAreaCreate').append('<button id="createRoomButton" value="Raum erstellen" class="button" onclick="createRoom()">Raum erstellen</button>');
@@ -97,7 +97,7 @@ $(function(){
         for(var i = 1;i<room._players.length;i++){
             $('#enemyArea').append('<div class="player" id="player'+(i+1)+'"><div class="playerName" id="player'+i+'Name">'+players[i]._name+'</div><div class="playerCard" id="player'+(i+1)+'Card"></div></div>')
         }
-        $('#selfArea').append('<select id="cardDeck" onchange="chooseCard()"></select>');
+        $('#selfArea').append('<select id="cardDeck" onclose="chooseCard()"></select>');
 
         //create Scoreboard
         var $scoreboard = $('#scoreboard');
@@ -117,7 +117,7 @@ $(function(){
                     }
                 }else{
                     if(j == 0){
-                        $scoreboardTable.children()[i].append('<th>'+(i+1)+'</th>');
+                        $scoreboardTable.children()[i].append('<th>'+i+'</th>');
                     }else{
                         $scoreboardTable.children()[i].append('<td>10</td><td>2</td>')
                     }
@@ -134,13 +134,20 @@ $(function(){
             var cardValue = translateValue(cards[i]._val);
             var card = cardColour +' '+ cardValue;
             $('#cardDeck').append('<option value="'+cards[i]+'">'+card+'</option>');
+            $('#cardDeck').select(null);
         }
+        $('#selfArea').append('<div id="trickArea"><input id="prediction" class="textfeld"><button id="predictionButton" class="button" onclick="predictionApply()">Stichansage bestätigen</button></div>')
     });
 
 });
 
+function predictionApply(){
+
+}
+
 function chooseCard(){
     //TODO: Eingabevalidierung
+    console.log("card was choosen");
     var $select = $('#cardDeck');
     var choosenCard = $select.options[$select.selectedIndex].value;
     $select.delete($select.selectedIndex);

@@ -243,6 +243,7 @@
         //Disconnect
         socket.on('disconnect', function(data){
             var index = connections.indexOf(socket);
+            /*
             for(var i = 0;i<rooms.length;i++){
                 for(var j = 0;j<rooms[i]._players.length;j++){
                     if(rooms[i]._players[j]._name == users[index]){
@@ -255,6 +256,7 @@
                     }
                 }
             }
+            */
             connections.splice(index, 1);
             users.splice(index, 1);
             console.log('Disconnected: %s sockets connected', connections.length);
