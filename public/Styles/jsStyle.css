@@ -13,6 +13,11 @@
     color: white;
 }
 
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
 #RoomChooserAreaCreate {
     height: 100%;
     width: 100%;
@@ -36,7 +41,21 @@
     margin-bottom: 20px;
     margin-top: 20px;
 }
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
+
+#myProfile {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+#gameRules {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+#onlineShop {
+    height: 100%;
+    width: 100%;
+    text-align: center;
 }

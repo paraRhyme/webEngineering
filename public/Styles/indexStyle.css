@@ -216,8 +216,8 @@ body {
     vertical-align: bottom; */
 }
 
-#card1 , #card2 , #card3, #card4, #card5 {
-    margin-right: 20px
+.textfield {
+ /* textfeld designen */
 }
 
 #footerLogin {
@@ -239,4 +239,23 @@ body {
 #footertext {
     padding-left: 20px;
     text-align: left;
+}
+
+/* TESTZEUG */
+
+#cards div {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    background-color: darkcyan;
+    width: 150px;
+    height: 20px;
+    text-align: center;
+    transition: height 2s ease-in-out;
+}
+
+#cards div:hover {
+    background-color: white;
+    height: 100px;
 }
