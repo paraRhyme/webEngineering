@@ -225,8 +225,18 @@ body {
 	background-color:darkcyan;
 	clear:both;
 }
+#footer {
+    height:30px;
+    background-color:darkcyan;
+    clear:both;
+}
 
  #footertextLogin {
+    padding-left: 20px;
+    text-align: left;
+}
+
+#footertext {
     padding-left: 20px;
     text-align: left;
 }

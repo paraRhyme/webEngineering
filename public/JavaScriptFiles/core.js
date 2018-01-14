@@ -102,7 +102,7 @@ $(function(){
 
         //create Scoreboard
         var $scoreboard = $('#scoreboard');
-        $scoreboard.append('<table id="scoreboardTable" "|"></table>');
+        $scoreboard.append('<table id="scoreboardTable" style="width:100%"></table>');
         var $scoreboardTable = $('#scoreboardTable');
         for(var i = 0;i<room._playRounds+1;i++){
             for(var j = 0;j<room._players.length+1;j++){
@@ -121,10 +121,10 @@ $(function(){
                         $scoreboardTable.append('<tr id="row'+i+'">');
                         $scoreboardTable.append('<th>'+i+'</th>');
                     }else if(j == room._players.length - 1){
-                        $scoreboardTable.append('<td class="points'+room._players[j-1]._name+'">10</td><td class="tricks'+room._players[j-1]._name+'">2</td>');
+                        $scoreboardTable.append('<td class="points'+room._players[j-1]._name+'"></td><td class="tricks'+room._players[j-1]._name+'" style="max-width:10px"></td>');
                         $scoreboardTable.append('</tr>');
                     }else{
-                        $scoreboardTable.append('<td class="points'+room._players[j-1]._name+'">10</td><td class="tricks'+room._players[j-1]._name+'">2</td>');
+                        $scoreboardTable.append('<td class="points'+room._players[j-1]._name+'"></td><td class="tricks'+room._players[j-1]._name+'" style="max-width:10px"></td>');
                     }
                 }
             }
